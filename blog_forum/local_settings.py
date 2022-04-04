@@ -2,11 +2,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'blog_forum',
-        'USER': 'TimJo',
-        'PASSWORD': '',
+        'USER': 'emir',
+        'PASSWORD': '1',
         'HOST': 'localhost',
         'PORT': 5432
     }
 }
 
-SECRET_KEY = 'django-insecure-f)64v)xqk+x%a^*(u+3%$*$kwrb6277iwg%d5ctjkw5=m52@w('
+SECRET_KEY = ')we6@9_l*hn!7hb0*mg-ssyf-#glmr4h@-(til7#te5)7w)k$9'
