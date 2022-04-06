@@ -1,3 +1,16 @@
 from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-# Create your views here.
+from main.serializers import PostSerializer
+
+
+class PostSerializer(APIView):
+    def post(self, request):
+        serializer = PostSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            message = """
+            Вы успешно создали пост!
+            """
+            return Response(message)

@@ -20,6 +20,7 @@ class RegisterView(APIView):
             serializer.save()
             return Response('Successfully registered!', status=status.HTTP_201_CREATED)
 
+
 class ActivationView(APIView):
     def get(self, request, activation_code):
         User = get_user_model()
@@ -29,8 +30,10 @@ class ActivationView(APIView):
         user.save()
         return Response('Your account was activated successfully', status=status.HTTP_200_OK)
 
+
 class LoginView(ObtainAuthToken):
     serializer_class = LoginSerializer
+
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated, ]
@@ -40,6 +43,7 @@ class LogoutView(APIView):
         Token.objects.filter(user=user).delete()
         return Response('Successfully logged out', status=status.HTTP_200_OK)
 
+
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated, ]
 
@@ -48,6 +52,7 @@ class ProfileView(APIView):
         profile = Profile.objects.get(user=user.id)
         serializer = ProfileSerializer(profile, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class ProfileUpdateView(generics.UpdateAPIView):
     queryset = Profile.objects.all()
