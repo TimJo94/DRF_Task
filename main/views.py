@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from main.serializers import PostSerializer
 
 
-class PostSerializer(APIView):
+class PostSerializerView(APIView):
     def post(self, request):
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
