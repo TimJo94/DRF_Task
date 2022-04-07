@@ -1,11 +1,9 @@
-import generics as generics
-from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import generics, viewsets
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
-from main.models import Post, Comment
-from main.serializers import PostSerializer, CommentSerializer
+from post.models import Post
+from post.permissions import IsPostAuthor
+from post.serializer import PostSerializer
 
 
 class PostListView(generics.ListAPIView):
@@ -16,6 +14,7 @@ class PostListView(generics.ListAPIView):
 class PostCreateView(generics.CreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated, ]
 
     def get_serializer_context(self):
         return {'request': self.request}
@@ -24,17 +23,10 @@ class PostCreateView(generics.CreateAPIView):
 class PostUpdateView(generics.UpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated, IsPostAuthor]
 
 
 class PostDeleteView(generics.DestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-
-
-class CommentListView(generics.ListAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-
-class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated, IsPostAuthor]

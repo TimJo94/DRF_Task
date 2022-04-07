@@ -1,12 +1,7 @@
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
 
-
-
-class Post(models.Model):
-    name = models.CharField(max_length=100)
-    body = models.TextField()
-
+from post.models import Post
 
 User = get_user_model()
 
